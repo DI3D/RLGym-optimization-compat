@@ -11,6 +11,7 @@ This is a python API that can be used to treat the game [Rocket League](https://
 * Python between versions 3.7 and 3.9 (3.10 not supported).
 
 ## Installation
+***----NOTE: THIS PROBABLY DOES NOT WORK----***
 Install the library via pip:
 ```
 pip install rlgym
