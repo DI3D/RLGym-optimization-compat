@@ -2,13 +2,11 @@
 Data classes to permit the manipulation of environment variables.
 """
 
-from typing import List
-
-import numpy as np
-
-from rlgym.utils.gamestates.game_state import GameState
-from rlgym.utils.gamestates.physics_object import PhysicsObject
 from rlgym.utils.gamestates.player_data import PlayerData
+from rlgym.utils.gamestates.physics_object import PhysicsObject
+from rlgym.utils.gamestates.game_state import GameState
+from typing import List
+import numpy as np
 
 BLUE_ID1 = 1
 ORANGE_ID1 = 5

@@ -1,14 +1,12 @@
 import json
 import os
-import re
 import subprocess
 import webbrowser
 from pathlib import Path
 from time import sleep
-from typing import Set, List, Optional
-
 import psutil
-
+from typing import Set, Tuple, Union, List, Optional
+import re
 
 # Copied from https://github.com/RLBot/RLBot/blob/master/src/main/python/rlbot/gamelaunch/epic_launch.py
 

@@ -2,16 +2,14 @@
 The Match object.
 """
 
-from typing import List, Union, Any
-
-import gym.spaces
-import numpy as np
-
 from rlgym.envs.environment import Environment
-# from rlgym.utils.state_setters.wrappers.state_wrapper import StateWrapper
-from rlgym.utils import common_values
 from rlgym.utils.gamestates import GameState
 from rlgym.utils.gamestates.game_state import FakeGameState
+# from rlgym.utils.state_setters.wrappers.state_wrapper import StateWrapper
+from rlgym.utils import common_values
+import gym.spaces
+import numpy as np
+from typing import List, Union, Any
 
 
 class Match(Environment):

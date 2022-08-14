@@ -1,8 +1,6 @@
 import math
-from typing import Any, List
-
 import numpy as np
-
+from typing import Any, List
 from rlgym.utils import common_values
 from rlgym.utils.gamestates import PlayerData, GameState, PhysicsObject
 from rlgym.utils.obs_builders import ObsBuilder

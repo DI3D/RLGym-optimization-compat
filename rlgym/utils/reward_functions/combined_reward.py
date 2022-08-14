@@ -1,9 +1,8 @@
 from typing import Optional, Tuple, Union
 
 import numpy as np
-
-from rlgym.utils.gamestates import GameState, PlayerData
 from rlgym.utils.reward_functions import RewardFunction
+from rlgym.utils.gamestates import GameState, PlayerData
 
 
 class CombinedReward(RewardFunction):

@@ -1,8 +1,7 @@
-import gym.spaces
 import numpy as np
-
-from rlgym.utils.action_parsers import ActionParser
+import gym.spaces
 from rlgym.utils.gamestates import GameState
+from rlgym.utils.action_parsers import ActionParser
 
 
 class DiscreteAction(ActionParser):

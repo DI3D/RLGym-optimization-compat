@@ -1,9 +1,9 @@
 from abc import abstractmethod
 
 import numpy as np
+from rlgym.utils import math
 
 from rlgym.utils import RewardFunction
-from rlgym.utils import math
 from rlgym.utils.common_values import BLUE_TEAM, ORANGE_TEAM
 from rlgym.utils.gamestates import PlayerData, GameState
 

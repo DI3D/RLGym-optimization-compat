@@ -2,7 +2,6 @@
 Base state setter class.
 """
 from abc import ABC, abstractmethod
-
 from rlgym.utils.state_setters.wrappers.state_wrapper import StateWrapper
 
 

@@ -3,7 +3,6 @@ A terminal condition.
 """
 
 from abc import ABC, abstractmethod
-
 from rlgym.utils.gamestates import GameState
 
 

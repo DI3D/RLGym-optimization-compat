@@ -2,13 +2,11 @@
 A basic library for useful mathematical operations.
 """
 
-import math
-import random
 from typing import Union, List
-
-import numba
+import math
 import numpy as np
-
+import numba
+import random
 import rlgym.rlgym_rust as rlgym_rust
 
 

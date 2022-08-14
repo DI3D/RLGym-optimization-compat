@@ -1,9 +1,7 @@
-import random
-
-import numpy as np
-
 from rlgym.utils.state_setters import StateSetter
 from rlgym.utils.state_setters import StateWrapper
+import random
+import numpy as np
 
 
 class DefaultState(StateSetter):

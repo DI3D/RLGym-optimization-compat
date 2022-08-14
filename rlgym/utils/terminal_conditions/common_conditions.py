@@ -2,8 +2,8 @@
 A module containing implementations of common terminal conditions.
 """
 
-from rlgym.utils.gamestates import GameState
 from rlgym.utils.terminal_conditions import TerminalCondition
+from rlgym.utils.gamestates import GameState
 
 
 class TimeoutCondition(TerminalCondition):

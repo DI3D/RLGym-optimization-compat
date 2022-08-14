@@ -4,11 +4,11 @@ from warnings import warn
 
 from rlgym.envs import Match
 from rlgym.gamelaunch import LaunchPreference
-from rlgym.utils.action_parsers import DefaultAction
-from rlgym.utils.obs_builders import DefaultObs
-from rlgym.utils.reward_functions import DefaultReward
-from rlgym.utils.state_setters import DefaultState
 from rlgym.utils.terminal_conditions import common_conditions
+from rlgym.utils.reward_functions import DefaultReward
+from rlgym.utils.obs_builders import DefaultObs
+from rlgym.utils.action_parsers import DefaultAction
+from rlgym.utils.state_setters import DefaultState
 
 
 def make(game_speed: int = 100,

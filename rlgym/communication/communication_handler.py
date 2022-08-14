@@ -1,13 +1,12 @@
-import array
-from multiprocessing.pool import ThreadPool
-
-# import struct
-import numpy
-import win32file
-import win32pipe
-
 from rlgym.communication import Message
 from rlgym.communication import communication_exception_handler
+
+import win32file
+import win32pipe
+# import struct
+import numpy
+from multiprocessing.pool import ThreadPool
+import array
 
 
 class CommunicationHandler(object):

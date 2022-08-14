@@ -2,11 +2,10 @@
 Data classes to permit the manipulation of environment variables.
 """
 
-from typing import List
-
-from rlgym.utils.common_values import BLUE_TEAM, ORANGE_TEAM
 from rlgym.utils.gamestates.game_state import GameState
 from rlgym.utils.state_setters.wrappers import PhysicsWrapper, CarWrapper
+from rlgym.utils.common_values import BLUE_TEAM, ORANGE_TEAM
+from typing import List
 
 
 class StateWrapper(object):

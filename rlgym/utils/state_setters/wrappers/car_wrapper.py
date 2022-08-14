@@ -1,7 +1,6 @@
-import numpy as np
-
-from rlgym.utils.gamestates import PlayerData
 from rlgym.utils.state_setters.wrappers import PhysicsWrapper
+from rlgym.utils.gamestates import PlayerData
+import numpy as np
 
 
 class CarWrapper(PhysicsWrapper):

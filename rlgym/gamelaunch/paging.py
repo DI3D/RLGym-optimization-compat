@@ -1,8 +1,6 @@
 import ctypes
 import time
-
 from win32con import PROCESS_ALL_ACCESS, PROCESS_SET_QUOTA, PROCESS_QUERY_INFORMATION
-
 
 def page_rocket_league(rl_pid: int = -1, delay: int = 0):
     if rl_pid > 0:

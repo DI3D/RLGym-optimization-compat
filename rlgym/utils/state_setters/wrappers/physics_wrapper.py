@@ -1,6 +1,5 @@
-import numpy as np
-
 from rlgym.utils.gamestates import PhysicsObject
+import numpy as np
 
 
 class PhysicsWrapper(object):

@@ -2,14 +2,10 @@
 A class to represent the state of a physics object from the game.
 """
 
+from rlgym.utils import math
+from numpy import ndarray, zeros, fromiter, ones
 # from numpy import zeros
 from typing import Optional, List, Union
-
-from numpy import ndarray, zeros, fromiter, ones
-
-from rlgym.utils import math
-
-
 # import numba
 # from numba import float64, boolean
 # from numba.experimental import jitclass

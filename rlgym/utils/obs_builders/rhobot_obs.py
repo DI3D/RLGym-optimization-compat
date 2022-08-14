@@ -1,7 +1,6 @@
-import numpy as np
-
-from rlgym.utils import common_values, math
 from rlgym.utils.obs_builders import ObsBuilder
+from rlgym.utils import common_values, math
+import numpy as np
 
 
 class RhobotObs(ObsBuilder):

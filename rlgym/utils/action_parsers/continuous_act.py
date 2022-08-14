@@ -1,11 +1,10 @@
 # import math
-import gym.spaces
-import numpy as np
-
 import rlgym.utils.math as math
+import numpy as np
+import gym.spaces
 from rlgym.utils import common_values
-from rlgym.utils.action_parsers import ActionParser
 from rlgym.utils.gamestates import GameState
+from rlgym.utils.action_parsers import ActionParser
 
 
 class ContinuousAction(ActionParser):

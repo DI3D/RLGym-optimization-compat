@@ -1,6 +1,5 @@
-import math as math_py
-
 import numpy as np
+import math as math_py
 
 from rlgym.utils import math
 from rlgym.utils.common_values import BLUE_TEAM, BLUE_GOAL_BACK, ORANGE_GOAL_BACK, ORANGE_TEAM, CAR_MAX_SPEED

@@ -1,8 +1,7 @@
-import numpy as np
-
+from rlgym.utils.reward_functions import RewardFunction
 from rlgym.utils import math
 from rlgym.utils.gamestates import GameState, PlayerData
-from rlgym.utils.reward_functions import RewardFunction
+import numpy as np
 
 
 # THIS REWARD IS FOR DEMONSTRATION PURPOSES ONLY

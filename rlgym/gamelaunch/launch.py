@@ -1,12 +1,11 @@
-import os
 import platform
+from dataclasses import dataclass
 import subprocess
 import webbrowser
 from pathlib import Path
 from typing import Optional
-
 from rlgym.gamelaunch.epic_launch import launch_with_epic_simple, launch_with_epic_login_trick
-
+import os
 
 # Copied from https://github.com/RLBot/RLBot/blob/master/src/main/python/rlbot/setup_manager.py
 

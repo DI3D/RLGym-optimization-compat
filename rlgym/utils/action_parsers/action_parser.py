@@ -3,12 +3,10 @@ The action parser.
 """
 
 from abc import ABC, abstractmethod
-from typing import Any
-
+from rlgym.utils.gamestates import PlayerData, GameState
 import gym.spaces
 import numpy as np
-
-from rlgym.utils.gamestates import GameState
+from typing import List, Union, Tuple, Dict, Any
 
 
 class ActionParser(ABC):

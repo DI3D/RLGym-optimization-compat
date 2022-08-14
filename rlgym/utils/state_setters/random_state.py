@@ -1,9 +1,8 @@
-import numpy as np
-from numpy import random as rand
-
-from rlgym.utils.math import rand_vec3
 from rlgym.utils.state_setters import StateSetter
 from rlgym.utils.state_setters import StateWrapper
+from rlgym.utils.math import rand_vec3
+import numpy as np
+from numpy import random as rand
 
 X_MAX = 7000
 Y_MAX = 9000

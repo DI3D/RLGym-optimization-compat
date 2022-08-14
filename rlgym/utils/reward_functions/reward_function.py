@@ -3,10 +3,8 @@ The reward function.
 """
 
 from abc import ABC, abstractmethod
-
-import numpy as np
-
 from rlgym.utils.gamestates import GameState, PlayerData
+import numpy as np
 
 
 class RewardFunction(ABC):
