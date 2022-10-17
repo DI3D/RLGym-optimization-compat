@@ -4,8 +4,10 @@ The observation builder.
 
 from abc import ABC, abstractmethod
 from rlgym.utils.gamestates import PlayerData, GameState
-import gym
-import numpy as np
+# import gym
+from gym.spaces import Space
+# import numpy as np
+from numpy import ndarray
 from typing import Any
 
 
@@ -14,7 +16,7 @@ class ObsBuilder(ABC):
     def __init__(self):
         pass
 
-    def get_obs_space(self) -> gym.spaces.Space:
+    def get_obs_space(self) -> Space:
         """
         Function that returns the observation space type. It will be called during the initialization of the environment.
 
@@ -43,7 +45,7 @@ class ObsBuilder(ABC):
         pass
 
     @abstractmethod
-    def build_obs(self, player: PlayerData, state: GameState, previous_action: np.ndarray) -> Any:
+    def build_obs(self, player: PlayerData, state: GameState, previous_action: ndarray) -> Any:
         """
         Function to build observations for a policy. This is where all observations will be constructed every step and
         every reset. This function is given a player argument, and it is expected that the observation returned by this

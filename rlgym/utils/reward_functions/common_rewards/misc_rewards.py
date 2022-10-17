@@ -42,8 +42,8 @@ class EventReward(RewardFunction):
             self.last_registered_values[player.car_id] = self._extract_values(player, initial_state)
 
     def get_reward(self, player: PlayerData, state: GameState, previous_action: np.ndarray, optional_data=None):
-        old_values = self.last_registered_values[player.car_id]
-        new_values = self._extract_values(player, state)
+        old_values, new_values = self.last_registered_values[player.car_id], self._extract_values(player, state)
+        # new_values = self._extract_values(player, state)
 
         # diff_values = new_values - old_values
         diff_values = [i - j for i, j in zip(new_values, old_values)]
@@ -51,10 +51,11 @@ class EventReward(RewardFunction):
         # diff_values = [x if x > 0 else 0 for x in diff_values]
 
         # reward = sum([i * j for i, j in zip(self.weights, diff_values)])
-        reward = sum([i*j if j > 0 else 0 for i, j in zip(self.weights, diff_values)])
+        reward, self.last_registered_values[player.car_id] = \
+            sum([i*j if j > 0 else 0 for i, j in zip(self.weights, diff_values)]), new_values
         # reward = np.dot(self.weights, diff_values)
 
-        self.last_registered_values[player.car_id] = new_values
+        # self.last_registered_values[player.car_id] = new_values
         return reward
 
 

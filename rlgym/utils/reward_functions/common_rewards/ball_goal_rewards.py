@@ -50,7 +50,7 @@ class VelocityBallToGoalReward(RewardFunction):
         else:
             objective = BLUE_GOAL_BACK
 
-        vel = state.ball.linear_velocity
+        # vel = state.ball.linear_velocity
         # pos_diff = objective - state.ball.position
         pos_diff = [i - j for i, j in zip(objective, state.ball.position)]
         # pos_diff_arr = np.fromiter(pos_diff, dtype=np.float64, count=len(pos_diff))
@@ -60,15 +60,15 @@ class VelocityBallToGoalReward(RewardFunction):
             # Vector version of v=d/t <=> t=d/v <=> 1/t=v/d
             # Max value should be max_speed / ball_radius = 2300 / 94 = 24.5
             # Used to guide the agent towards the ball
-            inv_t = math.scalar_projection_1d(list(vel), pos_diff)
-            return inv_t
+            # inv_t = math.scalar_projection_1d(list(state.ball.linear_velocity), pos_diff)
+            return math.scalar_projection_1d(list(state.ball.linear_velocity), pos_diff)
         else:
             # Regular component velocity
             # norm_pos_diff = pos_diff / np.linalg.norm(pos_diff)
             pos_diff_normed = math.norm_1d(pos_diff)
             norm_pos_diff = [i / pos_diff_normed for i in pos_diff]
             # norm_vel = vel / BALL_MAX_SPEED
-            norm_vel = [i / BALL_MAX_SPEED for i in vel]
+            norm_vel = [i / BALL_MAX_SPEED for i in state.ball.linear_velocity]
             # return float(np.dot(norm_pos_diff, norm_vel))
             return sum([i*j for i, j in zip(norm_pos_diff, norm_vel)])
 

@@ -30,7 +30,7 @@ class Environment:
         raise NotImplementedError
 
     @abstractmethod
-    def parse_state(self, state_string):
+    def parse_state(self, state_str):
         raise NotImplementedError
 
     @abstractmethod

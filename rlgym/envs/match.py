@@ -2,14 +2,17 @@
 The Match object.
 """
 
+from typing import List, Union, Any
+
+# import gym.spaces
+from gym.spaces import Box
+# import numpy as np
+from numpy import zeros, ndarray, copy, inf, shape
+
 from rlgym.envs.environment import Environment
-from rlgym.utils.gamestates import GameState
-from rlgym.utils.gamestates.game_state import FakeGameState
 # from rlgym.utils.state_setters.wrappers.state_wrapper import StateWrapper
 from rlgym.utils import common_values
-import gym.spaces
-import numpy as np
-from typing import List, Union, Any
+from rlgym.utils.gamestates import GameState
 
 
 class Match(Environment):
@@ -52,7 +55,7 @@ class Match(Environment):
         self._auto_detect_obs_space()
         self.action_space = self._action_parser.get_action_space()
 
-        self._prev_actions = np.zeros((self.agents, 8), dtype=float)
+        self._prev_actions = zeros((self.agents, 8), dtype=float)
         self._spectator_ids = None
 
         self.last_touch = None
@@ -73,10 +76,13 @@ class Match(Environment):
 
         self._obs_builder.pre_step(state)
 
-        for i in range(len(state.players)):
-            player = state.players[i]
-            obs = self._obs_builder.build_obs(player, state, self._prev_actions[i])
-            observations.append(obs)
+        for i, player in enumerate(state.players):
+            observations.append(self._obs_builder.build_obs(player, state, self._prev_actions[i]))
+
+        # for i in range(len(state.players)):
+        #     player = state.players[i]
+        #     obs = self._obs_builder.build_obs(player, state, self._prev_actions[i])
+        #     observations.append(obs)
 
         if state.last_touch is None:
             state.last_touch = self.last_touch
@@ -93,15 +99,20 @@ class Match(Environment):
 
         self._reward_fn.pre_step(state)
 
-        for i in range(len(state.players)):
-            player = state.players[i]
-
+        for i, player in enumerate(state.players):
             if done:
-                reward = self._reward_fn.get_final_reward(player, state, self._prev_actions[i])
+                rewards.append(self._reward_fn.get_final_reward(player, state, self._prev_actions[i]))
             else:
-                reward = self._reward_fn.get_reward(player, state, self._prev_actions[i])
-
-            rewards.append(reward)
+                rewards.append(self._reward_fn.get_reward(player, state, self._prev_actions[i]))
+        # for i in range(len(state.players)):
+        #     player = state.players[i]
+        #
+        #     if done:
+        #         reward = self._reward_fn.get_final_reward(player, state, self._prev_actions[i])
+        #     else:
+        #         reward = self._reward_fn.get_reward(player, state, self._prev_actions[i])
+        #
+        #     rewards.append(reward)
 
         if len(rewards) == 1:
             return rewards[0]
@@ -118,18 +129,17 @@ class Match(Environment):
         current_score = state.blue_score - state.orange_score
         return current_score - self._initial_score
 
-    @staticmethod
-    def parse_state(state_str: List[float]) -> GameState:
+    def parse_state(self, state_str: List[float]) -> GameState:
         state = GameState(state_str)
         return state
 
-    def parse_actions(self, actions: Any, state: GameState) -> np.ndarray:
+    def parse_actions(self, actions: Any, state: GameState) -> ndarray:
         # Prevent people from accidentally modifying numpy arrays inside the ActionParser
-        if isinstance(actions, np.ndarray):
-            actions = np.copy(actions)
+        if isinstance(actions, ndarray):
+            actions = copy(actions)
         return self._action_parser.parse_actions(actions, state)
 
-    def format_actions(self, actions: np.ndarray):
+    def format_actions(self, actions: ndarray):
         self._prev_actions[:len(actions)] = actions[:]
 
         acts = []
@@ -164,6 +174,7 @@ class Match(Environment):
 
     def _auto_detect_obs_space(self):
         from rlgym.utils.gamestates.player_data import FakePlayerData
+        from rlgym.utils.gamestates.game_state import FakeGameState
 
         num_cars = self._team_size*2 if self._spawn_opponents else self._team_size
         empty_player_packets = []
@@ -173,7 +184,7 @@ class Match(Environment):
             empty_player_packets.append(player_packet)
 
         empty_game_state = FakeGameState()
-        prev_inputs = np.zeros(common_values.NUM_ACTIONS)
+        prev_inputs = zeros(common_values.NUM_ACTIONS)
 
         empty_game_state.players = empty_player_packets
 
@@ -181,6 +192,6 @@ class Match(Environment):
         if self.observation_space is None:
             self._obs_builder.reset(empty_game_state)
             self._obs_builder.pre_step(empty_game_state)
-            obs_shape = np.shape(self._obs_builder.build_obs(empty_player_packets[0], empty_game_state, prev_inputs))
+            obs_shape = shape(self._obs_builder.build_obs(empty_player_packets[0], empty_game_state, prev_inputs))
 
-            self.observation_space = gym.spaces.Box(-np.inf, np.inf, shape=obs_shape)
+            self.observation_space = Box(-inf, inf, shape=obs_shape)

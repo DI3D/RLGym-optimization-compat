@@ -3,7 +3,7 @@ A class containing all data about a player in the game.
 """
 
 from rlgym.utils.gamestates import PhysicsObject
-from rlgym.utils.gamestates.physics_object import FakePhysicsObject
+from rlgym.utils.gamestates.physics_object import FakePhysicsObject, PhysicsObjectDecode
 
 
 class PlayerData(object):
@@ -27,21 +27,45 @@ class PlayerData(object):
 
 class FakePlayerData(object):
     def __init__(self):
-        self.car_id: int = -1
-        self.team_num: int = -1
-        self.match_goals: int = -1
-        self.match_saves: int = -1
-        self.match_shots: int = -1
-        self.match_demolishes: int = -1
-        self.boost_pickups: int = -1
+        self.car_id: int = 1
+        self.team_num: int = 0
+        self.match_goals: int = 0
+        self.match_saves: int = 0
+        self.match_shots: int = 0
+        self.match_demolishes: int = 0
+        self.boost_pickups: int = 0
         self.is_demoed: bool = False
-        self.on_ground: bool = False
+        self.on_ground: bool = True
         self.ball_touched: bool = False
-        self.has_jump: bool = False
-        self.has_flip: bool = False
-        self.boost_amount: float = -1
+        self.has_jump: bool = True
+        self.has_flip: bool = True
+        self.boost_amount: float = 0.34
         self.car_data: FakePhysicsObject = FakePhysicsObject()
         self.inverted_car_data: FakePhysicsObject = FakePhysicsObject()
+
+
+class PlayerDataDecode(object):
+    def __init__(self):
+        # self.car_id: int = -1
+        # self.team_num: int = -1
+        # self.match_goals: int = -1
+        # self.match_saves: int = -1
+        # self.match_shots: int = -1
+        # self.match_demolishes: int = -1
+        # self.boost_pickups: int = -1
+        # self.is_demoed: bool = False
+        # self.on_ground: bool = False
+        # self.ball_touched: bool = False
+        # self.has_jump: bool = False
+        # self.has_flip: bool = False
+        # self.boost_amount: float = -1
+        # self.car_data: PhysicsObjectDecode = PhysicsObjectDecode()
+        # self.inverted_car_data: PhysicsObjectDecode = PhysicsObjectDecode()
+        self.car_id, self.team_num, self.match_goals, self.match_saves, self.match_shots, self.match_demolishes, \
+        self.boost_pickups, self.is_demoed, self.on_ground, self.ball_touched, self.has_jump, self.has_flip, \
+        self.boost_amount, self.car_data, self.inverted_car_data = -1, -1, -1, -1, -1, -1, -1, False, False, False, \
+                                                                   False, False, -1, PhysicsObjectDecode(), \
+                                                                   PhysicsObjectDecode()
 
     # def __str__(self):
     #     output = "****PLAYER DATA OBJECT****\n" \
