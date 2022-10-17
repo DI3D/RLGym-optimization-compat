@@ -147,31 +147,23 @@ class PhysicsObject(object):
 
 class FakePhysicsObject(object):
     def __init__(self, position=None, quaternion=None, linear_velocity=None, angular_velocity=None):
-        # self.position: ndarray = position if position is not None else zeros(3)
-        # # self.position: Union[ndarray, List] = position if position is not None else [0, 0, 0]
-        #
-        # # ones by default to prevent mathematical errors when converting quat to rot matrix on empty physics state
-        # self.quaternion: ndarray = quaternion if quaternion is not None else ones(4)
-        # # self.quaternion: Union[ndarray, List] = quaternion if quaternion is not None else [1, 1, 1, 1]
-        #
-        # self.linear_velocity: ndarray = linear_velocity if linear_velocity is not None else zeros(3)
-        # # self.linear_velocity: Union[ndarray, List] = linear_velocity if linear_velocity is not None else [1, 1, 1]
-        # self.angular_velocity: ndarray = angular_velocity if angular_velocity is not None else zeros(3)
-        # # self.angular_velocity: Union[ndarray, List] = angular_velocity if angular_velocity is not None else [0, 0, 0]
-        # self._euler_angles: Optional[ndarray] = zeros(3)
-        # # self._euler_angles: Optional[List] = [0, 0, 0]
-        # self._rotation_mtx: Optional[ndarray] = zeros((3, 3))
-        # # self._rotation_mtx: Optional[np.ndarray] = np.asarray([[0, 0, 0], [0, 0, 0]])
-        # self._has_computed_rot_mtx = False
-        # self._has_computed_euler_angles = False
+        self.position: ndarray = position if position is not None else zeros(3)
+        # self.position: Union[ndarray, List] = position if position is not None else [0, 0, 0]
 
-        self.position, self.quaternion, self.linear_velocity, self.angular_velocity, self._euler_angles, \
-        self._rotation_mtx, self._has_computed_rot_mtx, self._has_computed_euler_angles = \
-            position if position is not None else [0, 0, 0], \
-            quaternion if quaternion is not None else [1, 1, 1, 1], \
-            linear_velocity if linear_velocity is not None else [1, 1, 1], \
-            angular_velocity if angular_velocity is not None else [0, 0, 0], [0, 0, 0], \
-            zeros((3, 3)), False, False
+        # ones by default to prevent mathematical errors when converting quat to rot matrix on empty physics state
+        self.quaternion: ndarray = quaternion if quaternion is not None else ones(4)
+        # self.quaternion: Union[ndarray, List] = quaternion if quaternion is not None else [1, 1, 1, 1]
+
+        self.linear_velocity: ndarray = linear_velocity if linear_velocity is not None else zeros(3)
+        # self.linear_velocity: Union[ndarray, List] = linear_velocity if linear_velocity is not None else [1, 1, 1]
+        self.angular_velocity: ndarray = angular_velocity if angular_velocity is not None else zeros(3)
+        # self.angular_velocity: Union[ndarray, List] = angular_velocity if angular_velocity is not None else [0, 0, 0]
+        self._euler_angles: Optional[ndarray] = zeros(3)
+        # self._euler_angles: Optional[List] = [0, 0, 0]
+        self._rotation_mtx: Optional[ndarray] = zeros((3, 3))
+        # self._rotation_mtx: Optional[np.ndarray] = np.asarray([[0, 0, 0], [0, 0, 0]])
+        self._has_computed_rot_mtx = False
+        self._has_computed_euler_angles = False
 
     def decode_car_data(self, car_data):
         """

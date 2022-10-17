@@ -28,7 +28,7 @@ class LiuDistanceBallToGoalReward(RewardFunction):
         # BACK_NET_Y - BACK_WALL_Y + BALL_RADIUS)
         # dist = np.linalg.norm([i - j for i, j in zip([i - j for i, j in zip(state.ball.position, objective)])]) - (
         #             BACK_NET_Y - BACK_WALL_Y + BALL_RADIUS)
-        dist = math.norm_1d([i - j for i, j in zip([i - j for i, j in zip(state.ball.position, objective)])])\
+        dist = math.norm_1d([i - j for i, j in zip([i - j for i, j in zip(state.ball.position, objective)])]) \
                - self.partial
         # dist = np.linalg.norm(state.ball.position - objective) - (BACK_NET_Y - BACK_WALL_Y + BALL_RADIUS)
         return math_py.exp(-0.5 * dist / BALL_MAX_SPEED)  # Inspired by https://arxiv.org/abs/2105.12196
@@ -70,7 +70,7 @@ class VelocityBallToGoalReward(RewardFunction):
             # norm_vel = vel / BALL_MAX_SPEED
             norm_vel = [i / BALL_MAX_SPEED for i in state.ball.linear_velocity]
             # return float(np.dot(norm_pos_diff, norm_vel))
-            return sum([i*j for i, j in zip(norm_pos_diff, norm_vel)])
+            return sum([i * j for i, j in zip(norm_pos_diff, norm_vel)])
 
 
 class BallYCoordinateReward(RewardFunction):

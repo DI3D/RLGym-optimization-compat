@@ -94,7 +94,7 @@ class Match(Environment):
 
         return observations
 
-    def get_rewards(self, state, done) -> Union[float, List]:
+    def get_rewards(self, state: GameState, done) -> Union[float, List]:
         rewards = []
 
         self._reward_fn.pre_step(state)

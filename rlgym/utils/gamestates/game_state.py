@@ -1,15 +1,15 @@
 """
     Object to contain all relevant information about the game state.
 """
-# import numpy
-# import numpy as np
 from typing import Optional, List, Union
 
 # import numpy as np
 from numpy import fromiter, ndarray
 
+# from numba import njit
+
 from rlgym.utils.gamestates import PlayerData
-from rlgym.utils.gamestates.player_data import PlayerDataDecode, FakePlayerData
+from rlgym.utils.gamestates.player_data import PlayerDataDecode
 from rlgym.utils.gamestates.physics_object import PhysicsObjectDecode
 from rlgym.utils.gamestates.physics_object import FakePhysicsObject
 
@@ -108,7 +108,10 @@ class GameState(object):
         # t_len = self.PLAYER_TERTIARY_INFO_LENGTH
         # t_len = 11
 
-        start = 2
+        # player_data = decode_player_njit(full_player_data, player_data, self.PLAYER_CAR_STATE_LENGTH,
+        #                                  self.PLAYER_TERTIARY_INFO_LENGTH)
+
+        start: int = 2
 
         # car_data = fromiter(full_player_data[start:start + self.PLAYER_CAR_STATE_LENGTH], float,
         #                     count=self.PLAYER_CAR_STATE_LENGTH)
@@ -167,6 +170,28 @@ class GameState(object):
         return output
 
 
+# @njit(cache=True)
+# def decode_player_njit(full_player_data: ndarray, player_data, PLAYER_CAR_STATE_LENGTH, PLAYER_TERTIARY_INFO_LENGTH):
+#     start: int = 2
+#     player_data.car_data.decode_car_data(full_player_data[start:start + PLAYER_CAR_STATE_LENGTH])
+#     start = start + PLAYER_CAR_STATE_LENGTH
+#     player_data.inverted_car_data.decode_car_data(full_player_data[start:start + PLAYER_CAR_STATE_LENGTH])
+#     start = start + PLAYER_CAR_STATE_LENGTH
+#
+#     tertiary_data = full_player_data[start:start + PLAYER_TERTIARY_INFO_LENGTH]
+#
+#     player_data.match_goals, player_data.match_saves, player_data.match_shots, player_data.match_demolishes, \
+#     player_data.boost_pickups, player_data.is_demoed, player_data.on_ground, player_data.ball_touched, \
+#     player_data.has_jump, player_data.has_flip, player_data.boost_amount, player_data.car_id, \
+#     player_data.team_num = int(tertiary_data[0]), int(tertiary_data[1]), int(tertiary_data[2]), \
+#                            int(tertiary_data[3]), int(tertiary_data[4]), True if tertiary_data[5] > 0 else False, \
+#                            True if tertiary_data[6] > 0 else False, True if tertiary_data[7] > 0 else False, \
+#                            True if tertiary_data[8] > 0 else False, True if tertiary_data[9] > 0 else False, \
+#                            float(tertiary_data[10]), int(full_player_data[0]), int(full_player_data[1])
+#
+#     return player_data
+
+
 class FakeGameState(object):
     BOOST_PADS_LENGTH = 34
     BALL_STATE_LENGTH = 18
@@ -176,28 +201,14 @@ class FakeGameState(object):
 
     def __init__(self, state_floats: List[float] = None):
         self.game_type: int = 0
-        self.blue_score: int = 0
-        self.orange_score: int = 0
-        self.last_touch: Optional[int] = 0
+        self.blue_score: int = -1
+        self.orange_score: int = -1
+        self.last_touch: Optional[int] = -1
 
-        self.players: List[FakePlayerData] = [FakePlayerData(), FakePlayerData()]
+        self.players: List[PlayerData] = []
 
         self.ball: FakePhysicsObject = FakePhysicsObject()
-        self.ball.position = fromiter([300, 300, 92.75], dtype=float)
-        self.ball.linear_velocity = fromiter([100, 5, 10], dtype=float)
         self.inverted_ball: FakePhysicsObject = FakePhysicsObject()
-        self.players[0].car_id = 1
-        self.players[0].team_num = 0
-        self.players[0].boost_amount = 0.34
-        self.players[0].car_data.position = fromiter([0., 0., 17.0], dtype=float)
-        self.players[0].car_data.linear_velocity = fromiter([-5., -3., 0.], dtype=float)
-        self.players[0].car_data.angular_velocity = fromiter([-3., -1., 0.1], dtype=float)
-        self.players[1].car_id = 2
-        self.players[1].team_num = 0
-        self.players[1].boost_amount = 0.34
-        self.players[1].car_data.position = fromiter([50., 0., 17.0], dtype=float)
-        self.players[1].car_data.linear_velocity = fromiter([-5., -3., 0.], dtype=float)
-        self.players[1].car_data.angular_velocity = fromiter([-3., -1., 0.1], dtype=float)
 
         # List of "booleans" (1 or 0)
         # self.boost_pads: np.ndarray = np.zeros(GameState.BOOST_PADS_LENGTH, dtype=np.float32)
@@ -280,10 +291,10 @@ class FakeGameState(object):
         player_data.match_goals, player_data.match_saves, player_data.match_shots, player_data.match_demolishes, \
         player_data.boost_pickups, player_data.is_demoed, player_data.on_ground, player_data.ball_touched, \
         player_data.has_jump, player_data.has_flip, player_data.boost_amount, player_data.car_id, \
-        player_data.team_num = int(tertiary_data[0]), int(tertiary_data[2]), int(tertiary_data[3]), \
-                               int(tertiary_data[4]), True if tertiary_data[5] > 0 else False, \
-                               True if tertiary_data[6] > 0 else False, True if tertiary_data[7] > 0 else False, \
-                               True if tertiary_data[8] > 0 else False, True if tertiary_data[9] > 0 else False, \
+        player_data.team_num = int(tertiary_data[0]), int(tertiary_data[1]), int(tertiary_data[2]), \
+                               int(tertiary_data[3]), True if tertiary_data[4] > 0 else False, \
+                               True if tertiary_data[5] > 0 else False, True if tertiary_data[6] > 0 else False, \
+                               True if tertiary_data[7] > 0 else False, True if tertiary_data[8] > 0 else False, \
                                True if tertiary_data[9] > 0 else False, float(tertiary_data[10]), \
                                int(full_player_data[0]), int(full_player_data[1])
         # player_data.match_saves = int(tertiary_data[1])

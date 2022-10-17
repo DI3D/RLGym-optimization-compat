@@ -133,18 +133,16 @@ class Gym(Env):
         actions = self._match.parse_actions(actions, self._prev_state)
         actions_sent = self._send_actions(actions)
 
-        received_state = self._receive_state()
+        state = self._receive_state()
 
         # If, for any reason, the state is not successfully received, we do not want to just crash the API.
         # This will simply pretend that the state did not change and advance as though nothing went wrong.
-        if received_state is None:
+        if state is None:
             print("FAILED TO RECEIEVE STATE! FALLING TO", self._prev_state)
             state = self._prev_state
-        else:
-            state = received_state
 
         obs = self._match.build_observations(state)
-        done = self._match.is_done(state) or received_state is None or not actions_sent
+        done = self._match.is_done(state) or state is None or not actions_sent
         reward = self._match.get_rewards(state, done)
         self._prev_state = state
 

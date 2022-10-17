@@ -125,15 +125,13 @@ def _add_player_to_obs_jit(POS_STD: float, ANG_STD: float, obs: ndarray, i: int,
 
 
 class AdvancedObs(ObsBuilder):
-    """Adds padding of zeroes to accommodate differing numbers of agents,
-     default behavior is pad as if always playing 3s"""
-
     def __init__(self, expanding=False, team_size=1):
         super().__init__()
         self.POS_STD = 2300
         self.ANG_STD = pi
         self.expanding = expanding
         self.team_size = team_size
+        self.obs_size = 51+25+(31*(self.team_size*2-1))
 
     def reset(self, initial_state: GameState):
         pass
@@ -151,15 +149,15 @@ class AdvancedObs(ObsBuilder):
                                     ball.angular_velocity / self.ANG_STD
 
         # TODO 1s for now, will work out if accurate later
-        obs = zeros(51+(31*self.team_size*2))
+        obs = zeros(self.obs_size)
 
         obs[0:3], obs[3:6], obs[6:9], obs[9:17], obs[17:51] = pos_std, lin_std, ang_std, previous_action, pads
 
         i = 51
         player_car, i = self._add_player_to_obs(obs, player, ball, inverted, i)
-        # i = 121
+        # i = 76
 
-        ally_count, enemy_count, i_enemies, i_allies = 0, 0, i+(31*self.team_size-1), i
+        ally_count, enemy_count, i_enemies, i_allies = 0, 0, i+(31*(self.team_size-1)), i
         for other in state.players:
             if other.car_id == player.car_id:
                 continue

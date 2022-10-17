@@ -27,19 +27,19 @@ class PlayerData(object):
 
 class FakePlayerData(object):
     def __init__(self):
-        self.car_id: int = 1
-        self.team_num: int = 0
-        self.match_goals: int = 0
-        self.match_saves: int = 0
-        self.match_shots: int = 0
-        self.match_demolishes: int = 0
-        self.boost_pickups: int = 0
+        self.car_id: int = -1
+        self.team_num: int = -1
+        self.match_goals: int = -1
+        self.match_saves: int = -1
+        self.match_shots: int = -1
+        self.match_demolishes: int = -1
+        self.boost_pickups: int = -1
         self.is_demoed: bool = False
-        self.on_ground: bool = True
+        self.on_ground: bool = False
         self.ball_touched: bool = False
-        self.has_jump: bool = True
-        self.has_flip: bool = True
-        self.boost_amount: float = 0.34
+        self.has_jump: bool = False
+        self.has_flip: bool = False
+        self.boost_amount: float = -1
         self.car_data: FakePhysicsObject = FakePhysicsObject()
         self.inverted_car_data: FakePhysicsObject = FakePhysicsObject()
 

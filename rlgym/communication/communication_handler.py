@@ -4,7 +4,8 @@ from rlgym.communication import communication_exception_handler
 import win32file
 import win32pipe
 # import struct
-import numpy
+from struct import unpack
+# import numpy
 from multiprocessing.pool import ThreadPool
 import array
 
@@ -27,7 +28,7 @@ class CommunicationHandler(object):
             print("RLGYM ATTEMPTED TO RECEIVE MESSAGE WITH NO CONNECTION")
             return communication_exception_handler.BROKEN_PIPE_ERROR
 
-        received_message = Message()
+        received_message = self.message
         exception_code = None
         try:
             for i in range(num_attempts):
@@ -35,12 +36,12 @@ class CommunicationHandler(object):
                 # a = array.array("f")
                 code, msg_bytes = win32file.ReadFile(self._pipe, CommunicationHandler.RLGYM_DEFAULT_PIPE_SIZE)
                 # a = array.array("f")
-                arr = numpy.frombuffer(msg_bytes, dtype=numpy.float32)
-                msg_floats = arr.tolist()
+                # arr = numpy.frombuffer(msg_bytes, dtype=float)
+                # msg_floats = arr.tolist()
                 # a.frombytes(msg_bytes)
 
                 # msg_floats = a.tolist()
-                # msg_floats = list(struct.unpack('%sf' % (len(msg_bytes)//4), msg_bytes))
+                msg_floats = list(unpack('%sf' % (len(msg_bytes)//4), msg_bytes))
                 deserialized_header = Message.deserialize_header(msg_floats)
                 # print("GOT HEADER",deserialized_header,"\nWANTED HEADER",header)
 
@@ -86,9 +87,9 @@ class CommunicationHandler(object):
             a.fromlist(serialized)
             # arr = numpy.fromiter(serialized, dtype=numpy.float32)
             # encoded = arr.tobytes()
-            encoded = a.tobytes()
+            # encoded = a.tobytes()
             # encoded = struct.pack('%sf' % len(serialized), *serialized)
-            win32file.WriteFile(self._pipe, encoded)
+            win32file.WriteFile(self._pipe, a.tobytes())
 
         except BaseException as e:
             print("Send message failed")
