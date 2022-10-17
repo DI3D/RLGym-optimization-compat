@@ -8,7 +8,7 @@ This is a python API that can be used to treat the game [Rocket League](https://
 * Rocket League (Both Steam and Epic are supported)
 * [Bakkesmod](https://www.bakkesmod.com)
 * The RLGym plugin for Bakkesmod (It's installed automatically by pip)
-* Python between versions 3.7 and 3.9 (3.10 not supported).
+* Python versions 3.8 and 3.9.
 
 ## Installation
 Because of the .pyd for RLGym-Rust calculations, you must copy and paste everything in the /rlgym directory instead of installing it unfortunately. If someone knows of a way to install .pyd files with the package, please do let me know.
