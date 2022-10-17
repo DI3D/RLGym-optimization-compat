@@ -11,11 +11,8 @@ This is a python API that can be used to treat the game [Rocket League](https://
 * Python between versions 3.7 and 3.9 (3.10 not supported).
 
 ## Installation
-***----NOTE: THIS PROBABLY DOES NOT WORK, for now you must copy/paste I think----***
-Install the library via pip:
-```
-pip install rlgym
-```
+Because of the .pyd for RLGym-Rust calculations, you must copy and paste everything in the /rlgym directory instead of installing it unfortunately. If someone knows of a way to install .pyd files with the package, please do let me know.
+
 Once the API is installed, you will need to enable the RLGym plugin from inside the Bakkesmod plugin manager. To do this, first launch the game, then press F2 to open the Bakkesmod menu. Navigate to the `plugins` tab and open the `Plugin Manager`. From there, scroll down until you find the RLGym plugin, and enable it. Close the game when this is done.
 
 RLGym is now installed! simply run ```example.py``` from our repo to ensure everything works.
