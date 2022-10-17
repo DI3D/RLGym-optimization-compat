@@ -4169,3 +4169,6 @@ notes_rust.txt
 pyproject.toml
 rlgym_rust.cp39-win_amd64.pyd
 rocket-league-gym-main.zip
+/tests/reward_funcs_new/custom_reward.py
+/tests/reward_funcs_new/
+/tests/new_parser/
